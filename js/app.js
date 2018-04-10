@@ -42,10 +42,10 @@ function add() {
 
     timer();
 }
+
 function timer() {
     t = setTimeout(add, 1000);
 }
-timer();
 
  // Listen on restart button to restart the game
 document.querySelector(".restart").addEventListener("click", function() {
