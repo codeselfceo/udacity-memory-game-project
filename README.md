@@ -1,7 +1,7 @@
-#Udacity Front-End Developer Nanodegree - Project 2
+# Udacity Front-End Developer Nanodegree - Project 2
 Memory Game
 
-##Technologies used
-*HTML
-*CSS
-*JavaScript
+## Technologies used
+* HTML
+* CSS
+* JavaScript
