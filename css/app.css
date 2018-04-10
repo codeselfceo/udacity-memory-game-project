@@ -23,7 +23,7 @@
 }
 
 .rubberBand {
-	animation-duration: 0.75s;
+    animation-duration: 0.75s;
     animation-name: rubberBand;
 }
 
@@ -42,6 +42,46 @@
 .shake {
     animation-duration: 0.75s;
     animation-name: shake;
+}
+
+@keyframes pulse {
+    from {
+        transform: scale3d(1, 1, 1);
+    }
+    50% {
+        transform: scale3d(1.05, 1.05, 1.05);
+    }
+    to {
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+.pulse {
+    animation-duration: 0.5s;
+    animation-name: pulse;
+}
+
+@keyframes tada {
+    from {
+        transform: scale3d(1, 1, 1);
+    }
+    10%, 20% {
+        transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg);
+    }
+    30%, 50%, 70%, 90% {
+        transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+    }
+    40%, 60%, 80% {
+        transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+    }
+    to {
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+.tada {
+	animation-duration: 0.5s;
+    animation-name: tada;
 }
 
 /**********************************/
@@ -163,4 +203,63 @@ h1 {
 .score-panel .timer {
     float: right;
     margin-right: 12px;
+}
+
+/* Modal */
+
+.modal {
+    width: 100vw;
+    height: 100vh;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-direction: column;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+
+.modal span i {
+    color: green;
+    font-size: 60px;
+    font-weight: lighter;
+    margin-bottom: 16px;
+}
+
+.modal h2 {
+    color: #455a64;
+    font-weight: lighter;
+    font-size: 2.5em;
+    margin: 0;
+}
+
+.modal p {
+    font-weight: lighter;
+    font-size: .85em;
+    margin: 0;
+    margin-bottom: 8px !important;
+    color: #757575;
+}
+
+.modal button {
+    width: 120px;
+    padding: 5px;
+    height: 35px;
+    color: #fff;
+    background-color: #009688;
+    font-size: .8em;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+/* Hidden content */
+
+.hidden {
+    display: none;
 }
