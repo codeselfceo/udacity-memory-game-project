@@ -71,10 +71,25 @@ function shuffle(array) {
     return array;
 }
 
+// Checks if win
+function winState() {
+	// Selects moves and stars
+	const finalMoves = moves.textContent;
+
+	// Final moves and final stars spans
+	const finalMovesSpan = document.getElementById("finalMoves");
+	const finalStarsSpan = document.getElementById("finalStars");
+
+	finalMovesSpan.textContent = finalMoves;
+
+	clearTimeout(t);
+	mainContainer.classList.add("hidden");
+	modalContainer.classList.remove("hidden");
+}
+
 function _flipCard(evt) {
 	// Add +1 to moves span
 	const currentMoves = +moves.textContent;
-	moves.textContent = currentMoves + 1;
 
 	const card = evt.target;
 	card.classList.add("open", "show");
@@ -82,6 +97,7 @@ function _flipCard(evt) {
 	if (!_openedCard) {
 		_openedCard = card;
 	} else {
+		moves.textContent = currentMoves + 1;
 		if (_openedCard.classList[1] === card.classList[1]) {
 			setTimeout(function() {
 				card.classList.add("match", "rubberBand");
@@ -92,9 +108,7 @@ function _flipCard(evt) {
 				_openedCard = null;
 				counter += 1;
 				if (counter === 8) {
-					clearTimeout(t);
-					mainContainer.classList.add("hidden");
-					modalContainer.classList.remove("hidden");
+					winState();
 				}
 			}, 100);
 		}
@@ -136,6 +150,7 @@ function _generateDeck() {
 
 	// Clean current deck
 	deck.innerHTML = "";
+	_openedCard = null;
 
 	// Iterates over suffledCards to create the new deck
 	for (let i = 0; i < suffledCards.length; i++) {
