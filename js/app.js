@@ -88,7 +88,7 @@ function _flipCard(evt) {
 				_openedCard = null;
 				counter += 1;
 				if (counter === 8) {
-					clearInterval(t);
+					clearTimeout(t);
 				}
 			}, 100);
 		}
