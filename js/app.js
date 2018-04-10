@@ -25,6 +25,31 @@ function shuffle(array) {
     return array;
 }
 
+/**
+ * Generates a deck
+*/
+function _generateDeck() {
+	// Gets HTML items
+	const deck = document.getElementById("deck");
+	const cards = deck.querySelectorAll(".card");
+
+	// Suffles the cards object to generate new deck
+	const suffledCards = shuffle(Array.from(cards));
+
+	// Clean current deck
+	deck.innerHTML = "";
+
+	// Iterates over suffledCards to create the new deck
+	for (let i = 0; i < suffledCards.length; i++) {
+		suffledCards[i].classList.remove("show", "open");
+		deck.appendChild(suffledCards[i]);
+	}
+}
+
+// Listen on restart button to restart the game
+document.querySelector(".restart").addEventListener("click", function() {
+	_generateDeck();
+}, true);
 
 /*
  * set up the event listener for a card. If a card is clicked:
