@@ -10,6 +10,48 @@
  *   - add each card's HTML to the page
  */
 
+ // Initializes deck
+document.addEventListener("DOMContentLoaded", _generateDeck, true);
+
+// Selects moves span
+const moves = document.querySelector(".moves");
+
+// Array to store opened cards
+let _openedCard = null;
+
+// To count pairs
+let counter = 0;
+
+// Variables used in timer
+let seconds = 0, minutes = 0, hours = 0, t;
+let spanTimer = document.querySelector(".timer");
+
+// Timer
+function add() {
+    seconds++;
+    if (seconds >= 60) {
+        seconds = 0;
+        minutes++;
+        if (minutes >= 60) {
+            minutes = 0;
+            hours++;
+        }
+    }
+
+    spanTimer.textContent = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
+
+    timer();
+}
+function timer() {
+    t = setTimeout(add, 1000);
+}
+timer();
+
+ // Listen on restart button to restart the game
+document.querySelector(".restart").addEventListener("click", function() {
+	_generateDeck();
+}, true);
+
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -25,10 +67,56 @@ function shuffle(array) {
     return array;
 }
 
+function _flipCard(evt) {
+	// Add +1 to moves span
+	const currentMoves = +moves.textContent;
+	moves.textContent = currentMoves + 1;
+
+	const card = evt.target;
+	card.classList.add("open", "show");
+
+	if (!_openedCard) {
+		_openedCard = card;
+	} else {
+		if (_openedCard.classList[1] === card.classList[1]) {
+			setTimeout(function() {
+				card.classList.add("match", "bounceIn");
+				_openedCard.classList.add("match", "bounceIn");
+
+				_openedCard.classList.remove("open", "show");
+				card.classList.remove("open", "show");
+				_openedCard = null;
+				counter += 1;
+				if (counter === 8) {
+					clearInterval(t);
+				}
+			}, 100);
+		}
+		else {
+			_openedCard.classList.add("wrong", "shake");
+			card.classList.add("wrong", "shake");
+			setTimeout(function() {
+				_openedCard.classList.remove("open", "show", "wrong", "shake");
+				card.classList.remove("open", "show", "wrong", "shake");
+				_openedCard = null;
+			}, 500);
+		}
+	}
+}
+
 /**
  * Generates a deck
 */
 function _generateDeck() {
+	// Clear timer and initializes it
+	clearTimeout(t);
+	spanTimer.textContent = "00:00:00";
+	seconds = 0, minutes = 0, hours = 0;
+	timer();
+
+	// Clear moves text
+	moves.textContent = "0";
+
 	// Gets HTML items
 	const deck = document.getElementById("deck");
 	const cards = deck.querySelectorAll(".card");
@@ -41,15 +129,12 @@ function _generateDeck() {
 
 	// Iterates over suffledCards to create the new deck
 	for (let i = 0; i < suffledCards.length; i++) {
-		suffledCards[i].classList.remove("show", "open");
-		deck.appendChild(suffledCards[i]);
+		let card = suffledCards[i];
+		card.classList.remove("show", "open", "match", "bounceIn", "shake");
+		card.addEventListener("click", _flipCard, true);
+		deck.appendChild(card);
 	}
 }
-
-// Listen on restart button to restart the game
-document.querySelector(".restart").addEventListener("click", function() {
-	_generateDeck();
-}, true);
 
 /*
  * set up the event listener for a card. If a card is clicked:
