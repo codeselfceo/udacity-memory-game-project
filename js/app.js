@@ -1,17 +1,9 @@
-/*
- * Create a list that holds all of your cards
- */
-
-
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
-
- // Initializes deck
+// Initializes deck
 document.addEventListener("DOMContentLoaded", _generateDeck, true);
+
+// Stars
+const stars = document.querySelectorAll(".fa-star");
+let finalStars = 3;
 
 // Main & Modal containers
 const mainContainer = document.querySelector(".container");
@@ -81,10 +73,29 @@ function winState() {
 	const finalStarsSpan = document.getElementById("finalStars");
 
 	finalMovesSpan.textContent = finalMoves;
+	finalStarsSpan.textContent = finalStars;
+
+	stars[1].classList.add("fa-star");
+	stars[1].classList.remove("fa-star-o");
+	stars[2].classList.add("fa-star");
+	stars[2].classList.remove("fa-star-o");
 
 	clearTimeout(t);
 	mainContainer.classList.add("hidden");
 	modalContainer.classList.remove("hidden");
+}
+
+// Manages stars
+function toggleStars() {
+	if (counter === 3) {
+		stars[2].classList.remove("fa-star");
+		stars[2].classList.add("fa-star-o");
+		finalStars = 2;
+	} else if (counter === 6) {
+		stars[1].classList.remove("fa-star");
+		stars[1].classList.add("fa-star-o");
+		finalStars = 1;
+	}
 }
 
 function _flipCard(evt) {
@@ -107,6 +118,8 @@ function _flipCard(evt) {
 				card.classList.remove("open", "show");
 				_openedCard = null;
 				counter += 1;
+				toggleStars();
+
 				if (counter === 8) {
 					winState();
 				}
@@ -160,14 +173,3 @@ function _generateDeck() {
 		deck.appendChild(card);
 	}
 }
-
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
