@@ -1,5 +1,5 @@
 # Memory Game
-This is the second project for Front-End Nanodegree](https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001) by Udacity.
+This is the second project for [Front-End Nanodegree](https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001) by Udacity.
 
 ## Technologies used
 * HTML
