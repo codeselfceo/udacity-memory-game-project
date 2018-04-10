@@ -13,6 +13,10 @@
  // Initializes deck
 document.addEventListener("DOMContentLoaded", _generateDeck, true);
 
+// Main & Modal containers
+const mainContainer = document.querySelector(".container");
+const modalContainer = document.querySelector(".modal");
+
 // Selects moves span
 const moves = document.querySelector(".moves");
 
@@ -89,6 +93,8 @@ function _flipCard(evt) {
 				counter += 1;
 				if (counter === 8) {
 					clearTimeout(t);
+					mainContainer.classList.add("hidden");
+					modalContainer.classList.remove("hidden");
 				}
 			}, 100);
 		}
@@ -113,6 +119,10 @@ function _generateDeck() {
 	spanTimer.textContent = "00:00:00";
 	seconds = 0, minutes = 0, hours = 0;
 	timer();
+
+	// Show main container and hides modal
+	mainContainer.classList.remove("hidden");
+	modalContainer.classList.add("hidden");
 
 	// Clear moves text
 	moves.textContent = "0";
