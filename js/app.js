@@ -76,6 +76,9 @@ function resetGame() {
 
 	// Temporal card set to null to be able to compare again
 	_openedCard = null;
+
+	// Reset matches counter
+	matchesCounter = 0;
 }
 
 /**
