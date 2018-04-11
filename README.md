@@ -5,7 +5,7 @@ This is the second project for [Front-End Nanodegree](https://www.udacity.com/co
 Feel free to fork or clone this project and add your own awesome features.
 
 ## Have fun!
-You can take a look and have fun [here](https://codeselfceo.github.io/udacity-front-end-nanodegree-project-2/)!
+You can take a look and have fun [here](https://codeselfceo.github.io/udacity-memory-game-project/)!
 
 ## Technologies used
 * HTML
