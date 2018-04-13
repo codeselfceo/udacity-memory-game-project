@@ -37,8 +37,8 @@ let seconds = 0, minutes = 0, hours = 0, t;
 let spanTimer = document.querySelector(".timer");
 
 /**
- * Shuffle array
- * From http://stackoverflow.com/a/2450976
+ * @description Shuffle array from http://stackoverflow.com/a/2450976
+ * @param {Array} array - Cards to suffle
 */
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -55,7 +55,7 @@ function shuffle(array) {
 }
 
 /**
- * Resets the previews deck
+ * @description Resets and prepare the deck to start a new deck
 */
 function resetGame() {
 	// Clear timer and starts it again
@@ -85,7 +85,7 @@ function resetGame() {
 }
 
 /**
- * Inits the Game
+ * @description Initializes a new game
 */
 function initGame() {
 	// Clears board and variables to start a new game
@@ -111,7 +111,7 @@ function initGame() {
 }
 
 /**
- * Flip cards to show its content
+ * @description Flip cards to show its content
 */
 function flipCard(evt) {
 	// Gets current moves text
@@ -128,6 +128,7 @@ function flipCard(evt) {
 		// Temporal saved card
 		_openedCard = card;
 	} else {
+		// Add disabled class to deck to prevent multiple cards opened
 		deck.classList.add("disabled");
 		// Increases moves count
 		moves.textContent = currentMoves + 1;
@@ -157,6 +158,8 @@ function flipCard(evt) {
 					// Manage winning
 					showResult();
 				}
+				
+				// Remove disabled class from deck to continue playing
 				deck.classList.remove("disabled");
 			}, 100);
 		} else {
@@ -171,6 +174,8 @@ function flipCard(evt) {
 
 				// Temporal card set to null to be able to compare again
 				_openedCard = null;
+
+				// Remove disabled class from deck to continue playing
 				deck.classList.remove("disabled");
 			}, 500);
 		}
@@ -178,7 +183,7 @@ function flipCard(evt) {
 }
 
 /**
- * Toggle stars depending on succesfull card matches
+ * @description Toggle stars depending on succesfull card matches
 */
 function toggleStars() {
 	if (matchesCounter === 3) {
@@ -193,7 +198,7 @@ function toggleStars() {
 }
 
 /**
- * Manage when user has Won
+ * @description Manage when user has Won
 */
 function showResult() {
 	// Selects moves and time
@@ -223,7 +228,7 @@ function showResult() {
 }
 
 /**
- * Timer controller
+ * @description Timer controller
 */
 function add() {
     seconds++;
@@ -241,6 +246,9 @@ function add() {
     timer();
 }
 
+/**
+ * @description Initializes timer
+ */
 function timer() {
     t = setTimeout(add, 1000);
 }
