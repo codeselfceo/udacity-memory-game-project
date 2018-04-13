@@ -8,6 +8,9 @@ document.querySelector(".restart").addEventListener("click", function() {
    initGame();
 }, true);
 
+// Game deck
+const deck = document.getElementById("deck");
+
 // Stars containers
 const stars = document.querySelectorAll(".fa-star");
 
@@ -89,7 +92,6 @@ function initGame() {
 	resetGame();
 
 	// Gets HTML items
-	const deck = document.getElementById("deck");
 	const cards = deck.querySelectorAll(".card");
 
 	// Suffles the cards object to generate new deck
@@ -126,6 +128,7 @@ function flipCard(evt) {
 		// Temporal saved card
 		_openedCard = card;
 	} else {
+		deck.classList.add("disabled");
 		// Increases moves count
 		moves.textContent = currentMoves + 1;
 
@@ -154,6 +157,7 @@ function flipCard(evt) {
 					// Manage winning
 					showResult();
 				}
+				deck.classList.remove("disabled");
 			}, 100);
 		} else {
 			// Means cards didn't match
@@ -167,6 +171,7 @@ function flipCard(evt) {
 
 				// Temporal card set to null to be able to compare again
 				_openedCard = null;
+				deck.classList.remove("disabled");
 			}, 500);
 		}
 	}
